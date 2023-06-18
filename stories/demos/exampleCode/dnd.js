@@ -42,6 +42,10 @@ export default function DragAndDrop({ localizer }) {
 
   const defaultDate = useMemo(() => new Date(2015, 3, 12), [])
 
+  const HeaderGroup = (resourceId) => (
+    <div>{resourceId ? resourceId : 'Not Set'}</div>
+  )
+
   return (
     <Fragment>
       <DemoLink fileName="dnd">
@@ -58,6 +62,11 @@ export default function DragAndDrop({ localizer }) {
           localizer={localizer}
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
+          groupKey="resource.spaceId"
+          groups={['1a', '2a', '3a', 'undefined']}
+          components={{
+            headerGroup: HeaderGroup,
+          }}
           popup
           resizable
         />

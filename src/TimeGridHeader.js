@@ -14,6 +14,44 @@ class TimeGridHeader extends React.Component {
     notify(this.props.onDrillDown, [date, view])
   }
 
+  groupBy = (data, key) => {
+    // Function to access nested object properties
+    const resolvePath = (object, path) =>
+      path
+        .split('.')
+        .reduce((o, k) => (o instanceof Array ? o[0] : o || {})[k], object)
+
+    return data.reduce((accumulator, item) => {
+      // Handle special case for arrays
+      if (key.includes('[]')) {
+        const splitKey = key.split('[]')
+        const array = resolvePath(item, splitKey[0])
+
+        if (Array.isArray(array)) {
+          array.forEach((subItem) => {
+            const newKey = splitKey[1]
+              ? resolvePath(subItem, splitKey[1])
+              : subItem.id
+
+            if (!accumulator[newKey]) {
+              accumulator[newKey] = []
+            }
+            accumulator[newKey].push(item)
+          })
+        }
+      } else {
+        // Handle normal case
+        const newKey = resolvePath(item, key)
+        if (!accumulator[newKey]) {
+          accumulator[newKey] = []
+        }
+        accumulator[newKey].push(item)
+      }
+
+      return accumulator
+    }, {})
+  }
+
   renderHeaderCells(range) {
     let {
       localizer,
@@ -114,28 +152,21 @@ class TimeGridHeader extends React.Component {
       rtl,
       resources,
       range,
-      events,
-      getNow,
+      groups,
       accessors,
-      selectable,
-      components,
-      getters,
       scrollRef,
-      localizer,
       isOverflowing,
       components: {
+        headerGroup: HeaderGroup,
         timeGutterHeader: TimeGutterHeader,
         resourceHeader: ResourceHeaderComponent = ResourceHeader,
       },
-      resizable,
     } = this.props
 
     let style = {}
     if (isOverflowing) {
       style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize() - 1}px`
     }
-
-    const groupedEvents = resources.groupEvents(events)
 
     return (
       <div
@@ -152,6 +183,14 @@ class TimeGridHeader extends React.Component {
 
         {resources.map(([id, resource], idx) => (
           <div className="rbc-time-header-content" key={id || idx}>
+            <div className="rbc-header-group">
+              {groups.map((group) => (
+                <div key={group || 'not-set-group'} className="rbc-group-slot">
+                  {HeaderGroup && HeaderGroup(group)}
+                  {!HeaderGroup && <div>{group || 'Not Set'}</div>}
+                </div>
+              ))}
+            </div>
             {resource && (
               <div className="rbc-row rbc-row-resource" key={`resource_${idx}`}>
                 <div className="rbc-header">
@@ -170,31 +209,6 @@ class TimeGridHeader extends React.Component {
             >
               {this.renderHeaderCells(range)}
             </div>
-            <DateContentRow
-              isAllDay
-              rtl={rtl}
-              getNow={getNow}
-              minRows={2}
-              // Add +1 to include showMore button row in the row limit
-              maxRows={this.props.allDayMaxRows + 1}
-              range={range}
-              events={groupedEvents.get(id) || []}
-              resourceId={resource && id}
-              className="rbc-allday-cell"
-              selectable={selectable}
-              selected={this.props.selected}
-              components={components}
-              accessors={accessors}
-              getters={getters}
-              localizer={localizer}
-              onSelect={this.props.onSelectEvent}
-              onShowMore={this.props.onShowMore}
-              onDoubleClick={this.props.onDoubleClickEvent}
-              onKeyPress={this.props.onKeyPressEvent}
-              onSelectSlot={this.props.onSelectSlot}
-              longPressThreshold={this.props.longPressThreshold}
-              resizable={resizable}
-            />
           </div>
         ))}
       </div>
@@ -232,6 +246,7 @@ TimeGridHeader.propTypes = {
   onShowMore: PropTypes.func,
   getDrilldownView: PropTypes.func.isRequired,
   scrollRef: PropTypes.any,
+  groupKey: PropTypes.string,
 }
 
 export default TimeGridHeader

@@ -131,7 +131,46 @@ export default class TimeGrid extends Component {
     })
   }
 
-  renderEvents(range, events, backgroundEvents, now) {
+  groupBy = (data, key) => {
+    // Function to access nested object properties
+    const resolvePath = (object, path) =>
+      path
+        .split('.')
+        .reduce((o, k) => (o instanceof Array ? o[0] : o || {})[k], object)
+
+    return data.reduce((accumulator, item) => {
+      // Handle special case for arrays
+      if (key.includes('[]')) {
+        const splitKey = key.split('[]')
+        const array = resolvePath(item, splitKey[0])
+
+        if (Array.isArray(array)) {
+          array.forEach((subItem) => {
+            const newKey = splitKey[1]
+              ? resolvePath(subItem, splitKey[1])
+              : subItem.id
+
+            if (!accumulator[newKey]) {
+              accumulator[newKey || undefined] = []
+            }
+            accumulator[newKey || undefined].push(item)
+          })
+        }
+      } else {
+        // Handle normal case
+        const newKey = resolvePath(item, key)
+
+        if (!accumulator[newKey]) {
+          accumulator[newKey || undefined] = []
+        }
+        accumulator[newKey || undefined].push(item)
+      }
+
+      return accumulator
+    }, {})
+  }
+
+  renderEvents(range, events, backgroundEvents, now, groupKey, groups) {
     let { min, max, components, accessors, localizer, dayLayoutAlgorithm } =
       this.props
 
@@ -161,22 +200,26 @@ export default class TimeGrid extends Component {
           )
         )
 
-        return (
-          <DayColumn
-            {...this.props}
-            localizer={localizer}
-            min={localizer.merge(date, min)}
-            max={localizer.merge(date, max)}
-            resource={resource && id}
-            components={components}
-            isNow={localizer.isSameDate(date, now)}
-            key={i + '-' + jj}
-            date={date}
-            events={daysEvents}
-            backgroundEvents={daysBackgroundEvents}
-            dayLayoutAlgorithm={dayLayoutAlgorithm}
-          />
-        )
+        const result = this.groupBy(daysEvents, groupKey)
+
+        return groups.map((group) => {
+          return (
+            <DayColumn
+              {...this.props}
+              localizer={localizer}
+              min={localizer.merge(date, min)}
+              max={localizer.merge(date, max)}
+              resource={resource && id}
+              components={components}
+              isNow={localizer.isSameDate(date, now)}
+              key={i + '-' + jj + '-' + group}
+              date={date}
+              events={result[group] || []}
+              backgroundEvents={groupKey ? [] : daysBackgroundEvents}
+              dayLayoutAlgorithm={dayLayoutAlgorithm}
+            />
+          )
+        })
       })
     )
   }
@@ -200,6 +243,8 @@ export default class TimeGrid extends Component {
       showMultiDayTimes,
       longPressThreshold,
       resizable,
+      groupKey,
+      groups,
     } = this.props
 
     width = width || this.state.gutterWidth
@@ -275,6 +320,8 @@ export default class TimeGrid extends Component {
           onDrillDown={this.props.onDrillDown}
           getDrilldownView={this.props.getDrilldownView}
           resizable={resizable}
+          groupKey={groupKey}
+          groups={groups}
         />
         {this.props.popup && this.renderOverlay()}
         <div
@@ -299,7 +346,9 @@ export default class TimeGrid extends Component {
             range,
             rangeEvents,
             rangeBackgroundEvents,
-            getNow()
+            getNow(),
+            groupKey,
+            groups
           )}
         </div>
       </div>
@@ -382,7 +431,11 @@ export default class TimeGrid extends Component {
   calculateScroll(props = this.props) {
     const { min, max, scrollToTime, localizer } = props
 
-    const diffMillis = localizer.diff(localizer.merge(scrollToTime, min), scrollToTime, 'milliseconds')
+    const diffMillis = localizer.diff(
+      localizer.merge(scrollToTime, min),
+      scrollToTime,
+      'milliseconds'
+    )
     const totalMillis = localizer.diff(min, max, 'milliseconds')
 
     this._scrollRatio = diffMillis / totalMillis
