@@ -567,6 +567,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-day-slot {
   position: relative;
+  min-width: 300px;
 }
 .rbc-day-slot .rbc-events-container {
   bottom: 0;
@@ -646,7 +647,7 @@ button.rbc-input::-moz-focus-inner {
   display: none;
 }
 .rbc-time-view-resources .rbc-day-slot {
-  min-width: 140px;
+  min-width: 300px;
 }
 .rbc-time-view-resources .rbc-header,
 .rbc-time-view-resources .rbc-day-bg {
@@ -692,6 +693,7 @@ button.rbc-input::-moz-focus-inner {
 }
 .rbc-header-group > .rbc-group-slot {
   width: 100%;
+  min-width: 300px;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -848,6 +850,10 @@ button.rbc-input::-moz-focus-inner {
   height: 1px;
   background-color: #74ad31;
   pointer-events: none;
+}
+
+.rbc-custom-header-gutter {
+  height: 4rem;
 }
 
 /*# sourceMappingURL=react-big-calendar.css.map */

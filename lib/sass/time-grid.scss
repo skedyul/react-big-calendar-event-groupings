@@ -12,6 +12,7 @@
 
   > .rbc-group-slot {
     width: 100%;
+    min-width: 300px;
     user-select: none;
     -webkit-user-select: none;
   }
@@ -156,4 +157,8 @@
 
   background-color: $current-time-color;
   pointer-events: none;
+}
+
+.rbc-custom-header-gutter {
+  height: 4rem;
 }

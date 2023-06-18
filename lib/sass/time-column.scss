@@ -29,6 +29,7 @@
 
 .rbc-day-slot {
   position: relative;
+  min-width: 300px;
 
   .rbc-events-container {
     bottom: 0;
@@ -106,7 +107,7 @@
   }
 
   .rbc-day-slot {
-    min-width: 140px;
+    min-width: 300px;
   }
 
   .rbc-header,
