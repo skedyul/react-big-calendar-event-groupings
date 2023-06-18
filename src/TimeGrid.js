@@ -6,7 +6,6 @@ import memoize from 'memoize-one'
 
 import DayColumn from './DayColumn'
 import TimeGutter from './TimeGutter'
-import TimeGridHeader from './TimeGridHeader'
 import PopOverlay from './PopOverlay'
 
 import getWidth from 'dom-helpers/width'
@@ -204,20 +203,25 @@ export default class TimeGrid extends Component {
 
         return groups.map((group) => {
           return (
-            <DayColumn
-              {...this.props}
-              localizer={localizer}
-              min={localizer.merge(date, min)}
-              max={localizer.merge(date, max)}
-              resource={resource && id}
-              components={components}
-              isNow={localizer.isSameDate(date, now)}
-              key={i + '-' + jj + '-' + group}
-              date={date}
-              events={result[group] || []}
-              backgroundEvents={groupKey ? [] : daysBackgroundEvents}
-              dayLayoutAlgorithm={dayLayoutAlgorithm}
-            />
+            <div>
+              <div className="rbc-custom-header-gutter">
+                {components.headerGroup(group)}
+              </div>
+              <DayColumn
+                {...this.props}
+                localizer={localizer}
+                min={localizer.merge(date, min)}
+                max={localizer.merge(date, max)}
+                resource={resource && id}
+                components={components}
+                isNow={localizer.isSameDate(date, now)}
+                key={i + '-' + jj + '-' + group}
+                date={date}
+                events={result[group] || []}
+                backgroundEvents={groupKey ? [] : daysBackgroundEvents}
+                dayLayoutAlgorithm={dayLayoutAlgorithm}
+              />
+            </div>
           )
         })
       })
@@ -229,9 +233,6 @@ export default class TimeGrid extends Component {
       events,
       backgroundEvents,
       range,
-      width,
-      rtl,
-      selected,
       getNow,
       resources,
       components,
@@ -241,13 +242,9 @@ export default class TimeGrid extends Component {
       min,
       max,
       showMultiDayTimes,
-      longPressThreshold,
-      resizable,
       groupKey,
       groups,
     } = this.props
-
-    width = width || this.state.gutterWidth
 
     let start = range[0],
       end = range[range.length - 1]
@@ -291,38 +288,6 @@ export default class TimeGrid extends Component {
         )}
         ref={this.containerRef}
       >
-        <TimeGridHeader
-          range={range}
-          events={allDayEvents}
-          width={width}
-          rtl={rtl}
-          getNow={getNow}
-          localizer={localizer}
-          selected={selected}
-          allDayMaxRows={
-            this.props.showAllEvents
-              ? Infinity
-              : this.props.allDayMaxRows ?? Infinity
-          }
-          resources={this.memoizedResources(resources, accessors)}
-          selectable={this.props.selectable}
-          accessors={accessors}
-          getters={getters}
-          components={components}
-          scrollRef={this.scrollRef}
-          isOverflowing={this.state.isOverflowing}
-          longPressThreshold={longPressThreshold}
-          onSelectSlot={this.handleSelectAllDaySlot}
-          onSelectEvent={this.handleSelectEvent}
-          onShowMore={this.handleShowMore}
-          onDoubleClickEvent={this.props.onDoubleClickEvent}
-          onKeyPressEvent={this.props.onKeyPressEvent}
-          onDrillDown={this.props.onDrillDown}
-          getDrilldownView={this.props.getDrilldownView}
-          resizable={resizable}
-          groupKey={groupKey}
-          groups={groups}
-        />
         {this.props.popup && this.renderOverlay()}
         <div
           ref={this.contentRef}

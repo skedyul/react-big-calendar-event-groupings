@@ -5,7 +5,6 @@ import React from 'react'
 
 import DateContentRow from './DateContentRow'
 import Header from './Header'
-import ResourceHeader from './ResourceHeader'
 import { notify } from './utils/helpers'
 
 class TimeGridHeader extends React.Component {
@@ -150,17 +149,10 @@ class TimeGridHeader extends React.Component {
     let {
       width,
       rtl,
-      resources,
-      range,
       groups,
-      accessors,
       scrollRef,
       isOverflowing,
-      components: {
-        headerGroup: HeaderGroup,
-        timeGutterHeader: TimeGutterHeader,
-        resourceHeader: ResourceHeaderComponent = ResourceHeader,
-      },
+      components: { headerGroup: HeaderGroup },
     } = this.props
 
     let style = {}
@@ -177,40 +169,18 @@ class TimeGridHeader extends React.Component {
         <div
           className="rbc-label rbc-time-header-gutter"
           style={{ width, minWidth: width, maxWidth: width }}
-        >
-          {TimeGutterHeader && <TimeGutterHeader />}
-        </div>
+        ></div>
 
-        {resources.map(([id, resource], idx) => (
-          <div className="rbc-time-header-content" key={id || idx}>
-            <div className="rbc-header-group">
-              {groups.map((group) => (
-                <div key={group || 'not-set-group'} className="rbc-group-slot">
-                  {HeaderGroup && HeaderGroup(group)}
-                  {!HeaderGroup && <div>{group || 'Not Set'}</div>}
-                </div>
-              ))}
-            </div>
-            {resource && (
-              <div className="rbc-row rbc-row-resource" key={`resource_${idx}`}>
-                <div className="rbc-header">
-                  <ResourceHeaderComponent
-                    index={idx}
-                    label={accessors.resourceTitle(resource)}
-                    resource={resource}
-                  />
-                </div>
+        <div className="rbc-time-header-content">
+          <div className="rbc-header-group">
+            {groups.map((group) => (
+              <div key={group || 'not-set-group'} className="rbc-group-slot">
+                {HeaderGroup && HeaderGroup(group)}
+                {!HeaderGroup && <div>{group || 'Not Set'}</div>}
               </div>
-            )}
-            <div
-              className={`rbc-row rbc-time-header-cell${
-                range.length <= 1 ? ' rbc-time-header-cell-single-day' : ''
-              }`}
-            >
-              {this.renderHeaderCells(range)}
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     )
   }

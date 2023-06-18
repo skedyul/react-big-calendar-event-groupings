@@ -84,6 +84,7 @@ const TimeGutter = ({
   return (
     <TimeGutterWrapper slotMetrics={slotMetrics}>
       <div className="rbc-time-gutter rbc-time-column" ref={gutterRef}>
+        <div className="rbc-custom-header-gutter"></div>
         {slotMetrics.groups.map((grp, idx) => {
           return (
             <TimeSlotGroup
