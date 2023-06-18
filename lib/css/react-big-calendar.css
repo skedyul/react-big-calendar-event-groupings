@@ -726,7 +726,6 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex: 1;
   flex: 1;
   width: 100%;
-  border: 1px solid #ddd;
   min-height: 0;
 }
 .rbc-time-view .rbc-time-gutter {
@@ -818,7 +817,6 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex-align: start;
   align-items: flex-start;
   width: 100%;
-  border-top: 2px solid #ddd;
   overflow-y: auto;
   position: relative;
 }
