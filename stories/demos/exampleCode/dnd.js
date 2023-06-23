@@ -42,8 +42,8 @@ export default function DragAndDrop({ localizer }) {
 
   const defaultDate = useMemo(() => new Date(2015, 3, 12), [])
 
-  const HeaderGroup = (resourceId) => (
-    <div>{resourceId ? resourceId : 'Not Set'}</div>
+  const HeaderGroup = (resource) => (
+    <div>{resource ? resource.id : 'Not Set'}</div>
   )
 
   return (
@@ -63,7 +63,18 @@ export default function DragAndDrop({ localizer }) {
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
           groupKey="resource.spaceId"
-          groups={['1a', '2a', '3a', 'undefined']}
+          groups={[
+            {
+              id: '1a',
+            },
+            {
+              id: '2a',
+            },
+            {
+              id: '3a',
+            },
+            undefined,
+          ]}
           components={{
             headerGroup: HeaderGroup,
           }}

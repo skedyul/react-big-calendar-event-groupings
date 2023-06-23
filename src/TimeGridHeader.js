@@ -174,9 +174,12 @@ class TimeGridHeader extends React.Component {
         <div className="rbc-time-header-content">
           <div className="rbc-header-group">
             {groups.map((group) => (
-              <div key={group || 'not-set-group'} className="rbc-group-slot">
+              <div
+                key={group?.id || 'not-set-group'}
+                className="rbc-group-slot"
+              >
                 {HeaderGroup && HeaderGroup(group)}
-                {!HeaderGroup && <div>{group || 'Not Set'}</div>}
+                {!HeaderGroup && <div>{group?.id || 'Not Set'}</div>}
               </div>
             ))}
           </div>

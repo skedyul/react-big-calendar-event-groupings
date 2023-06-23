@@ -198,7 +198,6 @@ export default class TimeGrid extends Component {
             'day'
           )
         )
-
         const result = this.groupBy(daysEvents, groupKey)
 
         return groups.map((group) => {
@@ -215,9 +214,9 @@ export default class TimeGrid extends Component {
                 resource={resource && id}
                 components={components}
                 isNow={localizer.isSameDate(date, now)}
-                key={i + '-' + jj + '-' + group}
+                key={i + '-' + jj + '-' + (group?.id || 'undefined')}
                 date={date}
-                events={result[group] || []}
+                events={result[group?.id || 'undefined'] || []}
                 backgroundEvents={groupKey ? [] : daysBackgroundEvents}
                 dayLayoutAlgorithm={dayLayoutAlgorithm}
               />
