@@ -203,7 +203,7 @@ export default class TimeGrid extends Component {
 
         return groups.map((group) => {
           return (
-            <div>
+            <div className="rbc-group-content">
               <div className="rbc-custom-header-gutter">
                 {components.headerGroup(group)}
               </div>
