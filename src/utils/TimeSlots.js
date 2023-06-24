@@ -82,15 +82,16 @@ export function getSlotMetrics({
       return slots[slot]
     },
     closestGroupFromPoint(point, boundaryRect) {
-      const gutterWidth = 93
+      // const gutterWidth = 93
 
       const scrollLeft =
         document?.getElementsByClassName('rbc-time-content')[0]?.scrollLeft || 0
 
       return {
+        x: point.x,
         scrollLeft,
         boundaryRect,
-        px: Math.ceil((scrollLeft + boundaryRect.left - gutterWidth) / 300),
+        px: Math.floor((point.x - boundaryRect.left) / 300),
       }
     },
 
