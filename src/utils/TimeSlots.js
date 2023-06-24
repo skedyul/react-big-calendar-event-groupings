@@ -81,7 +81,7 @@ export function getSlotMetrics({
       )
       return slots[slot]
     },
-    closestGroupFromPoint(point, boundaryRect) {
+    closestGroupFromPoint(point, boundaryRect, groups) {
       // const gutterWidth = 93
 
       const scrollLeft =
