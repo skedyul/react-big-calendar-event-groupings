@@ -84,10 +84,12 @@ export function getSlotMetrics({
     closestGroupFromPoint(point, boundaryRect, groups) {
       const gutterWidth = 93
 
-      // const scrollLeft =
-      //   document?.getElementsByClassName('rbc-time-content')[0]?.scrollLeft || 0
+      const scrollLeft =
+        document?.getElementsByClassName('rbc-time-content')[0]?.scrollLeft || 0
 
-      return groups[Math.floor((boundaryRect.left - gutterWidth) / 300)]?.id
+      return groups[
+        Math.floor((scrollLeft + boundaryRect.left - gutterWidth) / 300)
+      ]?.id
     },
 
     closestSlotFromPoint(point, boundaryRect) {
