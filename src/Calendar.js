@@ -118,6 +118,13 @@ class Calendar extends React.Component {
     defaultView: PropTypes.string,
 
     /**
+     * Group key
+     * @type String
+     * @default 'resource.spaceId'
+     */
+    groupKey: PropTypes.string,
+
+    /**
      * An array of event objects to display on the calendar. Events objects
      * can be any shape, as long as the Calendar knows how to retrieve the
      * following details of the event:
@@ -147,7 +154,6 @@ class Calendar extends React.Component {
     groups: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([undefined])])
     ),
-    groupKey: PropTypes.string,
 
     /**
      * An array of background event objects to display on the calendar. Background
