@@ -742,6 +742,7 @@ class Calendar extends React.Component {
      *
      * ```jsx
      * let components = {
+     *   headerGroup: MyHeaderGroup,
      *   event: MyEvent, // used by each view (Month, Day, Week)
      *   eventWrapper: MyEventWrapper,
      *   eventContainerWrapper: MyEventContainerWrapper,
@@ -946,6 +947,7 @@ class Calendar extends React.Component {
         dayProp: (...args) => (dayPropGetter && dayPropGetter(...args)) || {},
       },
       components: defaults(components[view] || {}, omit(components, names), {
+        headerGroup: NoopWrapper,
         eventWrapper: NoopWrapper,
         backgroundEventWrapper: NoopWrapper,
         eventContainerWrapper: NoopWrapper,
