@@ -14,6 +14,7 @@ export default function withDragAndDrop(Calendar) {
     static propTypes = {
       ...Calendar.propTypes,
 
+      groupKey: PropTypes.string,
       onEventDrop: PropTypes.func,
       onEventResize: PropTypes.func,
       onDragStart: PropTypes.func,
