@@ -144,6 +144,11 @@ class Calendar extends React.Component {
      */
     events: PropTypes.arrayOf(PropTypes.object),
 
+    groups: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([undefined])])
+    ),
+    groupKey: PropTypes.string,
+
     /**
      * An array of background event objects to display on the calendar. Background
      * Events behave similarly to Events but are not factored into Event overlap logic,
