@@ -87,18 +87,20 @@ export function getSlotMetrics({
       const scrollLeft =
         document?.getElementsByClassName('rbc-time-content')[0]?.scrollLeft || 0
 
+      const width = document.body.clientWidth
+
       // hack for now
-      const gutter = window.width < 768 ? 68 : 318
+      const gutter = width < 768 ? 68 : 318
 
-      return {
-        gutter,
-        x: point.x,
-        boundaryRectLeft: boundaryRect.left,
-        scrollLeft,
-        boundaryRectRight: boundaryRect.right,
-      }
+      // return {
+      //   gutter,
+      //   x: point.x,
+      //   boundaryRectLeft: boundaryRect.left,
+      //   scrollLeft,
+      //   boundaryRectRight: boundaryRect.right,
+      // }
 
-      // return groups[Math.floor((boundaryRect.left + scrollLeft - gutter) / 300)]
+      return groups[Math.floor((boundaryRect.left + scrollLeft - gutter) / 300)]
     },
 
     closestSlotFromPoint(point, boundaryRect) {
