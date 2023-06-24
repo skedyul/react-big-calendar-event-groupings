@@ -42,7 +42,7 @@ class EventContainerWrapper extends React.Component {
       this.setState({ event: null, top: null, height: null })
   }
 
-  update(event, { startDate, endDate, top, height }) {
+  update(event, { startDate, endDate, top, height, group }) {
     const { event: lastEvent } = this.state
     if (
       lastEvent &&
@@ -55,7 +55,7 @@ class EventContainerWrapper extends React.Component {
     this.setState({
       top,
       height,
-      event: { ...event, start: startDate, end: endDate },
+      event: { ...event, start: startDate, end: endDate, group },
     })
   }
 
@@ -69,9 +69,18 @@ class EventContainerWrapper extends React.Component {
       bounds
     )
 
+    const newGroup = slotMetrics.closestGroupFromPoint(
+      { y: point.y - this.eventOffsetTop, x: point.x },
+      bounds,
+      this.context.draggable.groups
+    )
+
     const { duration } = eventTimes(event, accessors, this.props.localizer)
     let newEnd = this.props.localizer.add(newSlot, duration, 'milliseconds')
-    this.update(event, slotMetrics.getRange(newSlot, newEnd, false, true))
+    this.update(event, {
+      ...slotMetrics.getRange(newSlot, newEnd, false, true),
+      group: newGroup,
+    })
   }
 
   handleResize(point, bounds) {
@@ -242,6 +251,7 @@ class EventContainerWrapper extends React.Component {
     this.context.draggable.onEnd({
       start: event.start,
       end: event.end,
+      group: event.group,
       resourceId: resource,
     })
   }

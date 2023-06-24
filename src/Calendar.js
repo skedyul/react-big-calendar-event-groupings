@@ -774,6 +774,7 @@ class Calendar extends React.Component {
      * ```
      */
     components: PropTypes.shape({
+      headerGroup: PropTypes.elementType,
       event: PropTypes.elementType,
       eventWrapper: PropTypes.elementType,
       eventContainerWrapper: PropTypes.elementType,

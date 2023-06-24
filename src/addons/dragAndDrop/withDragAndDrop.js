@@ -53,6 +53,7 @@ export default function withDragAndDrop(Calendar) {
     getDnDContextValue() {
       return {
         draggable: {
+          groups: this.props.groups,
           onStart: this.handleInteractionStart,
           onEnd: this.handleInteractionEnd,
           onBeginAction: this.handleBeginAction,

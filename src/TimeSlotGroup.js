@@ -7,6 +7,7 @@ import BackgroundWrapper from './BackgroundWrapper'
 export default class TimeSlotGroup extends Component {
   render() {
     const {
+      test,
       renderSlot,
       resource,
       group,
@@ -23,6 +24,7 @@ export default class TimeSlotGroup extends Component {
             <Wrapper key={idx} value={value} resource={resource}>
               <div
                 {...slotProps}
+                {...test}
                 className={clsx('rbc-time-slot', slotProps.className)}
               >
                 {renderSlot && renderSlot(value, idx)}
