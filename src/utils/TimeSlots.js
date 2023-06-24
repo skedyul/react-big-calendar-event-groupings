@@ -81,7 +81,7 @@ export function getSlotMetrics({
       )
       return slots[slot]
     },
-    closestGroupFromPoint(point, boundaryRect, groups) {
+    closestGroupFromPoint(point, boundaryRect) {
       // const gutterWidth = 93
 
       const scrollLeft =
@@ -90,7 +90,15 @@ export function getSlotMetrics({
       // hack for now
       const gutter = window.width < 768 ? 68 : 318
 
-      return groups[Math.floor((boundaryRect.left + scrollLeft - gutter) / 300)]
+      return {
+        gutter,
+        x: point.x,
+        boundaryRectLeft: boundaryRect.left,
+        scrollLeft,
+        boundaryRectRight: boundaryRect.right,
+      }
+
+      // return groups[Math.floor((boundaryRect.left + scrollLeft - gutter) / 300)]
     },
 
     closestSlotFromPoint(point, boundaryRect) {
