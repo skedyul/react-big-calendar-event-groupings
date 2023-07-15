@@ -9,6 +9,14 @@ export default [
     end: new Date(2015, 3, 1),
     resource: {
       spaceId: '1a',
+      hosts: [
+        {
+          id: '1a',
+        },
+        {
+          id: '2a',
+        },
+      ],
     },
   },
   {
@@ -18,6 +26,14 @@ export default [
     end: new Date(2015, 3, 10),
     resource: {
       spaceId: '1a',
+      hosts: [
+        {
+          id: '1a',
+        },
+        {
+          id: '2a',
+        },
+      ],
     },
   },
 
@@ -28,6 +44,7 @@ export default [
     end: new Date(2016, 2, 20, 0, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
 
@@ -38,6 +55,7 @@ export default [
     end: new Date(2016, 10, 13, 0, 0, 0),
     resource: {
       spaceId: '2a',
+      hosts: [],
     },
   },
 
@@ -48,6 +66,7 @@ export default [
     end: new Date(2015, 3, 10, 0, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -58,6 +77,7 @@ export default [
     desc: 'Big conference for important people',
     resource: {
       spaceId: undefined,
+      hosts: [],
     },
   },
   {
@@ -68,6 +88,7 @@ export default [
     desc: 'Pre-meeting meeting, to prepare for the meeting',
     resource: {
       spaceId: null,
+      hosts: [],
     },
   },
   {
@@ -78,6 +99,7 @@ export default [
     desc: 'Power lunch',
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -87,6 +109,7 @@ export default [
     end: new Date(2015, 3, 12, 15, 0, 0, 0),
     resource: {
       spaceId: undefined,
+      hosts: [],
     },
   },
   {
@@ -97,6 +120,7 @@ export default [
     desc: 'Most important meal of the day',
     resource: {
       spaceId: '2a',
+      hosts: [],
     },
   },
   {
@@ -106,6 +130,7 @@ export default [
     end: new Date(2015, 3, 12, 21, 0, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -115,6 +140,7 @@ export default [
     end: new Date(2015, 3, 13, 10, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -124,6 +150,7 @@ export default [
     end: new Date(2015, 3, 13, 12, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -133,6 +160,14 @@ export default [
     end: new Date(2015, 3, 13, 14, 0, 0),
     resource: {
       spaceId: '1',
+      hosts: [
+        {
+          id: '1a',
+        },
+        {
+          id: '2a',
+        },
+      ],
     },
   },
   {
@@ -142,6 +177,7 @@ export default [
     end: new Date(2015, 3, 13, 16, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -151,6 +187,7 @@ export default [
     end: new Date(2015, 3, 18, 2, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -160,6 +197,7 @@ export default [
     end: new Date(2015, 3, 17, 23, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -169,6 +207,7 @@ export default [
     end: new Date(2015, 3, 22, 2, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -178,6 +217,7 @@ export default [
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -187,6 +227,7 @@ export default [
     end: now,
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -196,6 +237,7 @@ export default [
     end: new Date(2015, 3, 14, 19, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -205,6 +247,7 @@ export default [
     end: new Date(2015, 3, 14, 20, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -214,6 +257,7 @@ export default [
     end: new Date(2015, 3, 14, 17, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -223,6 +267,7 @@ export default [
     end: new Date(2015, 3, 14, 20, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -231,7 +276,8 @@ export default [
     start: new Date(2015, 3, 14, 17, 0, 0),
     end: new Date(2015, 3, 14, 18, 30, 0),
     resource: {
-      spaceId: '1',
+      spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -241,6 +287,7 @@ export default [
     end: new Date(2015, 3, 14, 18, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -250,6 +297,7 @@ export default [
     end: new Date(2015, 3, 14, 19, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -259,6 +307,7 @@ export default [
     end: new Date(2015, 3, 14, 20, 0, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -268,6 +317,7 @@ export default [
     end: new Date(2022, 9, 30, 4, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -277,6 +327,7 @@ export default [
     end: new Date(2022, 10, 6, 4, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
   {
@@ -286,6 +337,7 @@ export default [
     end: new Date(2023, 2, 12, 4, 30, 0),
     resource: {
       spaceId: '2a',
+      hosts: [],
     },
   },
   {
@@ -295,6 +347,7 @@ export default [
     end: new Date(2023, 2, 26, 4, 30, 0),
     resource: {
       spaceId: '1a',
+      hosts: [],
     },
   },
 ]

@@ -137,6 +137,8 @@ export default class TimeGrid extends Component {
         .split('.')
         .reduce((o, k) => (o instanceof Array ? o[0] : o || {})[k], object)
 
+    // console.log("d", data, key)
+
     return data.reduce((accumulator, item) => {
       // Handle special case for arrays
       if (key.includes('[]')) {
@@ -154,6 +156,13 @@ export default class TimeGrid extends Component {
             }
             accumulator[newKey || undefined].push(item)
           })
+
+          if (array.length === 0) {
+            if (!accumulator[undefined]) {
+              accumulator[undefined] = []
+            }
+            accumulator[undefined].push(item)
+          }
         }
       } else {
         // Handle normal case

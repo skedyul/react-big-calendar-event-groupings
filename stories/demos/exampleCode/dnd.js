@@ -62,7 +62,7 @@ export default function DragAndDrop({ localizer }) {
           localizer={localizer}
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
-          groupKey="resource.spaceId"
+          groupKey="resource.hosts[]"
           groups={[
             {
               id: '1a',
